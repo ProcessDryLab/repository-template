@@ -34,6 +34,10 @@ public class ResourceController {
 	public static final String INFO_FILE_NAME = "info.json";
 	public static final String CONTENT_FILE_NAME = "content";
 
+	static {
+		new File(UPLOAD_PATH).mkdirs();
+	}
+
 	@GetMapping("/resources")
 	public ResponseEntity<List<Resource>> list() {
 		List<Resource> resources = new ArrayList<>();
