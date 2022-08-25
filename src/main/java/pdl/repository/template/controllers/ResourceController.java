@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ public class ResourceController {
 
 		String extension = upfile.getOriginalFilename().substring(upfile.getOriginalFilename().lastIndexOf('.') + 1);
 		Resource r = new Resource(id, upfile.getOriginalFilename(),
-				new ResourceType(extension, "A file with extension ." + extension));
+				new ResourceType(extension, "A file with extension ." + extension), new Date());
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.writeValue(new File(path + INFO_FILE_NAME), r);
