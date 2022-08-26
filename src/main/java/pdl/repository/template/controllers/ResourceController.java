@@ -31,7 +31,7 @@ import pdl.repository.template.web.models.ResourceType;
 @CrossOrigin
 public class ResourceController {
 
-	public static final String UPLOAD_PATH = "uploads";
+	public static final String UPLOAD_PATH = System.getProperty("java.io.tmpdir") + "/uploads";
 	public static final String INFO_FILE_NAME = "info.json";
 	public static final String CONTENT_FILE_NAME = "content";
 
