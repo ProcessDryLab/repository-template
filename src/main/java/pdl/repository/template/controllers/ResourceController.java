@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,6 +75,17 @@ public class ResourceController {
 		return ResponseEntity.ok(r);
 	}
 
+	@DeleteMapping("/resources/{uuid}")
+	public ResponseEntity<Resource> delete(@PathVariable("uuid") String uuid) {
+		if (new File(UPLOAD_PATH + File.separator + uuid + File.separator + CONTENT_FILE_NAME).exists()) {
+			if (deleteDirectory(new File(UPLOAD_PATH + File.separator + uuid + File.separator))) {
+				return ResponseEntity.ok().build();
+			}
+		}
+		return ResponseEntity.notFound().build();
+
+	}
+
 	@GetMapping("/resources/{uuid}/details")
 	public ResponseEntity<Resource> details(@PathVariable("uuid") String uuid) {
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -96,5 +108,15 @@ public class ResourceController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+
+	private boolean deleteDirectory(File directoryToBeDeleted) {
+		File[] allContents = directoryToBeDeleted.listFiles();
+		if (allContents != null) {
+			for (File file : allContents) {
+				deleteDirectory(file);
+			}
+		}
+		return directoryToBeDeleted.delete();
 	}
 }
