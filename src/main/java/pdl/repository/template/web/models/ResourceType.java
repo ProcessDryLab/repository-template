@@ -1,5 +1,8 @@
 package pdl.repository.template.web.models;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,4 +15,13 @@ import lombok.Setter;
 public class ResourceType {
 	private String name = "";
 	private String description = "";
+	private List<String> visualizations = new LinkedList<>();
+
+	public ResourceType(String name, String description, String... visualizations) {
+		this.name = name;
+		this.description = description;
+		for (String v : visualizations) {
+			this.visualizations.add(v);
+		}
+	}
 }

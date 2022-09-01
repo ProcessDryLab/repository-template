@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,7 +68,8 @@ public class ResourceController {
 
 		String extension = upfile.getOriginalFilename().substring(upfile.getOriginalFilename().lastIndexOf('.') + 1);
 		Resource r = new Resource(id, upfile.getOriginalFilename(),
-				new ResourceType(extension, "A file with extension ." + extension), new Date());
+				new ResourceType(extension, "A file with extension ." + extension, "General overview", "Detailed view"),
+				new Date());
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.writeValue(new File(path + INFO_FILE_NAME), r);
@@ -105,6 +107,16 @@ public class ResourceController {
 			org.springframework.core.io.Resource file = new FileSystemResource(
 					UPLOAD_PATH + File.separator + uuid + File.separator + CONTENT_FILE_NAME);
 			return ResponseEntity.ok(file);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@PostMapping(value = "/resources/{uuid}/view")
+	public @ResponseBody ResponseEntity<String> view(@PathVariable("uuid") String uuid,
+			@RequestBody String visualization) {
+		if (new File(UPLOAD_PATH + File.separator + uuid + File.separator + CONTENT_FILE_NAME).exists()) {
+			return ResponseEntity.ok(visualization);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
