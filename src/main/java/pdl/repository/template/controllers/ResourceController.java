@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,18 +26,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pdl.repository.template.web.models.Resource;
 import pdl.repository.template.web.models.ResourceType;
+import pdl.repository.template.web.models.VisualizationType;
 
 @RestController
 @RequestMapping("/api/v1/")
 @CrossOrigin
 public class ResourceController {
 
-	public static final String UPLOAD_PATH = System.getProperty("java.io.tmpdir") + "/uploads";
+	public static final String UPLOAD_PATH = System.getProperty("java.io.tmpdir") + File.separator + "uploads";
 	public static final String INFO_FILE_NAME = "info.json";
 	public static final String CONTENT_FILE_NAME = "content";
 
 	static {
 		new File(UPLOAD_PATH).mkdirs();
+		System.out.println("Using '" + UPLOAD_PATH + "' as upload path");
 	}
 
 	@GetMapping("/resources")
@@ -68,7 +69,9 @@ public class ResourceController {
 
 		String extension = upfile.getOriginalFilename().substring(upfile.getOriginalFilename().lastIndexOf('.') + 1);
 		Resource r = new Resource(id, upfile.getOriginalFilename(),
-				new ResourceType(extension, "A file with extension ." + extension, "General overview", "Detailed view"),
+				new ResourceType(extension, "A file with extension ." + extension,
+						new VisualizationType("overview", "General overview"),
+						new VisualizationType("detailed", "Detailed view")),
 				new Date());
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -112,14 +115,13 @@ public class ResourceController {
 		}
 	}
 
-	@PostMapping(value = "/resources/{uuid}/view")
-	public @ResponseBody ResponseEntity<String> view(@PathVariable("uuid") String uuid,
-			@RequestBody String visualization) {
+	@GetMapping(value = "/resources/{uuid}/view/{visualization-id}")
+	public @ResponseBody String view(@PathVariable("uuid") String uuid,
+			@PathVariable("visualization-id") String visId) {
 		if (new File(UPLOAD_PATH + File.separator + uuid + File.separator + CONTENT_FILE_NAME).exists()) {
-			return ResponseEntity.ok(visualization);
-		} else {
-			return ResponseEntity.notFound().build();
+			return visId;
 		}
+		return "";
 	}
 
 	private boolean deleteDirectory(File directoryToBeDeleted) {

@@ -15,12 +15,12 @@ import lombok.Setter;
 public class ResourceType {
 	private String name = "";
 	private String description = "";
-	private List<String> visualizations = new LinkedList<>();
+	private List<VisualizationType> visualizations = new LinkedList<>();
 
-	public ResourceType(String name, String description, String... visualizations) {
+	public ResourceType(String name, String description, VisualizationType... visualizations) {
 		this.name = name;
 		this.description = description;
-		for (String v : visualizations) {
+		for (VisualizationType v : visualizations) {
 			this.visualizations.add(v);
 		}
 	}
