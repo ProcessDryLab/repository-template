@@ -8,6 +8,7 @@ import org.reflections.Reflections;
 
 import lombok.EqualsAndHashCode;
 import pdl.repository.annotations.Visualizer;
+import pdl.repository.utils.ReflectionsUtils;
 import pdl.repository.web.models.ResourceType;
 import pdl.repository.web.models.VisualizationType;
 
@@ -19,7 +20,7 @@ public abstract class IType {
 	public abstract ResourceType getResourceType();
 
 	public static IType construct(String fileName) throws Exception {
-		Reflections reflections = new Reflections("pdl.repository.types");
+		Reflections reflections = ReflectionsUtils.get();
 		for (Class<?> clazz : reflections.getSubTypesOf(IType.class)) {
 			try {
 				clazz.getDeclaredConstructor();
