@@ -1,4 +1,4 @@
-package pdl.repository.template;
+package pdl.repository;
 
 import javax.servlet.MultipartConfigElement;
 

@@ -1,4 +1,4 @@
-package pdl.repository.template.controllers;
+package pdl.repository.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.CrossOrigin;

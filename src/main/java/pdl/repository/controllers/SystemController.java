@@ -1,4 +1,4 @@
-package pdl.repository.template.controllers;
+package pdl.repository.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;

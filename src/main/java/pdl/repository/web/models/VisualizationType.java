@@ -1,4 +1,4 @@
-package pdl.repository.template.web.models;
+package pdl.repository.web.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,4 +12,5 @@ import lombok.Setter;
 public class VisualizationType {
 	private String id = "";
 	private String name = "";
+	private String type = "";
 }
