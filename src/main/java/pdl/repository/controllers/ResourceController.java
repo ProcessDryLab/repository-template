@@ -128,53 +128,6 @@ public class ResourceController {
 			if (visualizer != null) {
 				return visualizer.getVisualization(res, content);
 			}
-
-			/*
-			 * if ("bpmn".equalsIgnoreCase(res.getType().getName())) {
-			 * 
-			 * File content = new File( UPLOAD_PATH + File.separator + uuid + File.separator
-			 * + CONTENT_FILE_NAME + ".bpmn");
-			 * 
-			 * if ("description".equals(visId)) { return "<html><body><h1>" + res.getName()
-			 * + "</h1><p>A BPMN process model.</p></body></html>"; } else if
-			 * ("graph".equals(visId)) { return
-			 * GraphvizBPMNVisualization.visualize(Bpmn.readModelFromFile(content)); } }
-			 * 
-			 * if ("xes".equalsIgnoreCase(res.getType().getName())) {
-			 * 
-			 * File content = new File( UPLOAD_PATH + File.separator + uuid + File.separator
-			 * + CONTENT_FILE_NAME + ".xes"); XParser p = new XesXmlParser(); XLog l =
-			 * p.parse(content).get(0);
-			 * 
-			 * if ("description".equals(visId)) { return "<html><body><h1>" + res.getName()
-			 * + "</h1><p>" + l.size() + " traces.</p></body></html>"; } else if
-			 * ("graph".equals(visId)) {
-			 * 
-			 * Map<String, Set<String>> dfg = new HashMap<>(); for (XTrace t : l) { String
-			 * prec = null; for (XEvent e : t) { String curr =
-			 * XConceptExtension.instance().extractName(e); if (prec != null) { if
-			 * (!dfg.containsKey(prec)) { dfg.put(prec, new HashSet<>()); }
-			 * dfg.get(prec).add(curr); } prec = curr; } } String graph = "digraph DFG {\n";
-			 * for (String src : dfg.keySet()) { for (String tgt : dfg.get(src)) { graph =
-			 * graph + "\"" + src + "\" -> \"" + tgt + "\";\n"; } } graph = graph + "}";
-			 * return graph; }
-			 * 
-			 * } }
-			 * 
-			 * if ("description".equals(visId)) { return
-			 * "<html><body><h1>Title</h1><p>Text.</p></body></html>"; } else if
-			 * ("graph".equals(visId)) { return "digraph G {\r\n" + "\r\n" +
-			 * "  subgraph cluster_0 {\r\n" + "    style=filled;\r\n" +
-			 * "    color=lightgrey;\r\n" + "    node [style=filled,color=white];\r\n" +
-			 * "    a0 -> a1 -> a2 -> a3;\r\n" + "    label = \"process #1\";\r\n" +
-			 * "  }\r\n" + "\r\n" + "  subgraph cluster_1 {\r\n" +
-			 * "    node [style=filled];\r\n" + "    b0 -> b1 -> b2 -> b3;\r\n" +
-			 * "    label = \"process #2\";\r\n" + "    color=blue\r\n" + "  }\r\n" +
-			 * "  start -> a0;\r\n" + "  start -> b0;\r\n" + "  a1 -> b3;\r\n" +
-			 * "  b2 -> a3;\r\n" + "  a3 -> a0;\r\n" + "  a3 -> end;\r\n" +
-			 * "  b3 -> end;\r\n" + "\r\n" + "  start [shape=Mdiamond];\r\n" +
-			 * "  end [shape=Msquare];\r\n" + "}";
-			 */
 		}
 		return "";
 	}
