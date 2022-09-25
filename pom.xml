@@ -37,8 +37,7 @@
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<version>2.3.0</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.deckfour</groupId>
 			<artifactId>openxes</artifactId>
@@ -85,8 +84,7 @@
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
-			<version>3.0.15.RELEASE</version>
-		</dependency>
+			</dependency>
 	</dependencies>
 
 	<build>
