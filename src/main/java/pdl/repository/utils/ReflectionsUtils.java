@@ -4,9 +4,12 @@ import org.reflections.Reflections;
 
 public class ReflectionsUtils {
 
+	private static Reflections instance = null;
+
 	public static Reflections get() {
-//		boolean deploy = ReflectionsUtils.class.getProtectionDomain().getCodeSource().getLocation().toString().startsWith("jar");
-//		return deploy? Reflections.collect() :
-		return new Reflections("pdl.repository");
+		if (instance == null) {
+			instance = new Reflections("pdl.repository");
+		}
+		return instance;
 	}
 }

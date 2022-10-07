@@ -4,6 +4,8 @@ import pdl.repository.web.models.ResourceType;
 
 public class TypeBPMN extends IType {
 
+	public static final TypeBPMN instance = new TypeBPMN();
+
 	@Override
 	public String[] recognizedExtensions() {
 		return new String[] { "bpmn" };

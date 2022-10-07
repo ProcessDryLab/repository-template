@@ -17,4 +17,12 @@ public class Resource {
 	private String name;
 	private ResourceType type;
 	private Date creationDate;
+	private String host;
+
+	public Resource(UUID id, String name, ResourceType type, Date creationDate) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.creationDate = creationDate;
+	}
 }

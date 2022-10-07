@@ -6,15 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Miner {
+
+	@EqualsAndHashCode.Include
 	private String id = UUID.randomUUID().toString();
 	private String name = "";
-	private String description = "";
 	private Map<String, ResourceType> input = new HashMap<>();
 	private List<Parameter> parameters = new LinkedList<>();
 	private List<ResourceType> output = new LinkedList<>();
